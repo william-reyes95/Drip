@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 
 export default function Nft() {
     const address = useSelector((state) => state.wallet.address)
-    const { state } = useLocation();
     const [nft, setNFT] = useState(null);
     const params = useParams();
     const tokenId = params['id']
