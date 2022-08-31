@@ -1,6 +1,5 @@
 import React , { useState, useEffect } from 'react';
 import Layout from '../components/Layout'
-import { useSelector } from 'react-redux';
 import { Grid, Image, Container, Menu } from 'semantic-ui-react';
 import LatestSales from "../components/LatestSales";
 import '../css/marketplace.css';
@@ -8,7 +7,6 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 
 
 export default function Marketplace() {
-    // const address = useSelector((state) => state.wallet.address)
     const [allListings, setAllListings] = useState(null)
 
     useEffect(()=>{
