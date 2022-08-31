@@ -52,4 +52,4 @@ jobs:
           app-name: 'drip'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BCD51994AE5B453692F7F664FCE67F51 }}
-          package: .
+          package: "./build"
