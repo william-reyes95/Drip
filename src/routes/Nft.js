@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout'
 import Ownerships from '../components/Ownerships'
 import Media from '../components/Media'
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Button, Grid, Image, Segment, Icon } from 'semantic-ui-react'
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useSelector } from 'react-redux';
