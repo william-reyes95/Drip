@@ -4,25 +4,23 @@ import { useSelector } from 'react-redux';
 import { Grid, Image, Container, Menu } from 'semantic-ui-react';
 import LatestSales from "../components/LatestSales";
 import '../css/marketplace.css';
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+
 
 export default function Marketplace() {
-    const address = useSelector((state) => state.wallet.address)
-    const sdk = useSelector((state) => state.wallet.sdk)
+    // const address = useSelector((state) => state.wallet.address)
     const [allListings, setAllListings] = useState(null)
-
 
     useEffect(()=>{
         async function fetchData(){
-          if (address){
+            const sdk = new ThirdwebSDK("mumbai")
             const marketplace = sdk.getMarketplace("0x0E3495883C3697098A0100433EE8F7ce6B493280");
             const all_listings = await marketplace.getAllListings();
             setAllListings(all_listings)
-          }
-        
         }
         fetchData()
 
-      },[address, sdk,])
+      },[])
 
     const AllListings = () =>{
         if(allListings){
@@ -49,7 +47,6 @@ export default function Marketplace() {
                 }else{
                     listingType = 'Direct Listing'
                 }
-
 
             return(
                 <Grid>
@@ -96,7 +93,6 @@ export default function Marketplace() {
         <Layout>
             <Container fluid style={{background:'black', paddingBottom:'5%', paddingTop:'5%'}}>
             <div style={{margin:'auto', width:'50%'}}>
-                <Image size='massive'src={'https://cdn.shopify.com/s/files/1/1265/6377/t/9/assets/slide4.jpg?v=94242335884143365241659965036'}/>
             </div>
                 <div style={{margin:'auto', width:'50%'}}>
                     <TeamMenu/>

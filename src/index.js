@@ -21,7 +21,6 @@ const activeChainId = ChainId.Mainnet;
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
     <ThirdwebProvider desiredChainId={activeChainId}>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"/>
       <Provider store={store}>
@@ -36,7 +35,6 @@ root.render(
         </BrowserRouter>
       </Provider>
     </ThirdwebProvider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

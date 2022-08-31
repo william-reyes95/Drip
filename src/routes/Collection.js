@@ -40,6 +40,11 @@ function Collection() {
         })
         return (<Card.Group className="card-group" itemsPerRow={3}>{Items}</Card.Group>)
       }
+      else{
+        return(<div style={{textAlign:"center"}}>
+                <h1>Connect Wallet To View Your Collection</h1>
+              </div>)
+      }
     }
     return (
       <Layout>

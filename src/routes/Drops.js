@@ -3,27 +3,23 @@ import { Button, Card, Image } from 'semantic-ui-react'
 import Layout from '../components/Layout'
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 
 export default function Drops() {
     const address = useSelector((state) => state.wallet.address)
-    const sdk = useSelector((state) => state.wallet.sdk)
     const [drops, setDrops] = useState(null)
     const [contract, setContract] = useState(null)
 
     useEffect(()=>{
         async function fetchData(){
-          if (address){
+            const sdk = new ThirdwebSDK("mumbai")
             const nftDrop = sdk.getNFTDrop("0x50199376EE8073Dc9C1498eD4b18916fb165b779");
-            
             setContract(nftDrop)
             const unclaimedNFTs = await nftDrop.getAllUnclaimed();
             setDrops(unclaimedNFTs)
-            console.log(unclaimedNFTs)
-          }
-        
         }
         fetchData()
-      },[address, sdk])
+      }, [])
 
     const claimDrop = async () =>{
         const quantity = 1;
@@ -38,14 +34,14 @@ export default function Drops() {
 
     const UnclaimedDrops = () =>{
         if(drops){
-            const tmp = [...drops, ...drops, ...drops]
-            const Items = tmp.map( (nft) => {
+            // const tmp = [...drops, ...drops, ...drops]
+            const Items = drops.map( (nft) => {
                 const key = nft['id']
                 const name = nft['name']
                 const image = nft['image']
                 return(
-                    <Link to={`/nft=${key}`} state={{nft:{'metadata':nft}}}>
-                        <Card key={key} style={{background:'#1E1E1D', 'padding':'5%'}}>
+                    <Link key={key} to={`/nft=${key}`} state={{nft:{'metadata':nft}}}>
+                        <Card  style={{background:'#1E1E1D', 'padding':'5%'}}>
                             <Image src={image}/>
                             <Card.Content >
                                 <Card.Header style={{color:'white'}}>{name}</Card.Header>

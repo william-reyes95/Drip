@@ -6,9 +6,9 @@ function NewListings() {
     const kerfoot = require('../assets/kerfoot_.png')
 
     const Feed = () =>{
-      const Items = images.map(()=>{
+      const Items = images.map((item, key)=>{
         return(
-          <Card style={{background:'#1E1E1D', 'padding':'5%'}}>
+          <Card key={key} style={{background:'#1E1E1D', 'padding':'5%'}}>
             <Grid>
               <Grid.Column width={4}>
                 <Card>
