@@ -39,6 +39,7 @@ export default function Drops() {
                 const key = nft['id']
                 const name = nft['name']
                 const image = nft['image']
+                console.log(nft)
                 return(
                     <Link key={key} to={`/nft=${key}`} state={{nft:{'metadata':nft}}}>
                         <Card  style={{background:'#1E1E1D', 'padding':'5%'}}>
