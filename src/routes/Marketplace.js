@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import Layout from '../components/Layout'
-import { Grid, Image, Container, Menu } from 'semantic-ui-react';
+import { Grid, Image, Container, Menu, Icon } from 'semantic-ui-react';
 import LatestSales from "../components/LatestSales";
 import '../css/marketplace.css';
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
@@ -65,6 +65,14 @@ export default function Marketplace() {
                 )
             })
             return (<div>{Items}</div>)
+        }else{
+            return (
+            <div style={{background:'black'}}>
+                <div style={{textAlign:'center'}}>
+                    <Icon loading name='circle notched' size='massive'/>
+                </div>
+            </div>
+            )
         }
     }
 

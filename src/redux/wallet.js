@@ -5,6 +5,7 @@ export const addressSlice = createSlice({
   initialState: {
     address: false,
     sdk: false,
+    isDesktop: true,
   },
   reducers: {
     setAddress: (state, action) => {
@@ -16,11 +17,14 @@ export const addressSlice = createSlice({
     },
     setSDK: (state, action) => {
         state.sdk = action.payload
+      },
+    setIsDesktop: (state, action) => {
+        state.isDesktop = action.payload
       }
   },
   
 })
 
 // Action creators are generated for each case reducer function
-export const { setAddress, setSDK } = addressSlice.actions
+export const { setAddress, setSDK, setIsDesktop } = addressSlice.actions
 export default addressSlice.reducer

@@ -3,12 +3,17 @@ import Layout from '../components/Layout'
 import Ownerships from '../components/Ownerships'
 import Media from '../components/Media'
 import { useParams } from "react-router-dom";
-import { Button, Grid, Image, Segment, Icon } from 'semantic-ui-react'
+import { Button, Grid, Image, Segment, Icon, Card, Accordion } from 'semantic-ui-react'
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useSelector } from 'react-redux';
-
+import { useMediaQuery } from 'react-responsive';
+import { ethers } from 'ethers';
 
 export default function Nft() {
+    const isDesktopOrLaptop = useMediaQuery({query: '(min-width: 800px)'})
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 800px)'})
+
+    const [activeIndex, setIndex] = useState(null)
     const address = useSelector((state) => state.wallet.address)
     const [nft, setNFT] = useState(null);
     const params = useParams();
@@ -75,33 +80,109 @@ export default function Nft() {
             )
         }
     }
+
+   const handleClick = (e, titleProps) => {
+        const { index } = titleProps;
+        if(activeIndex === index)
+            setIndex(null)
+        else
+            setIndex(index)
+      }
+
     if(nft){
-        return (
-            <Layout>
-                <div style={{background:'black', paddingBottom:'5%'}}>
-                    <div style={{paddingTop:'5%'}}>
-                        <div className="ui raised very padded text container segment" >
-                            <h2>{nft.metadata.name}</h2>
-                            <Segment>
-                                <Grid columns={2} relaxed='very'>
-                                    <Grid.Column>
-                                        <p>
-                                        <Image src={nft.metadata.image} size='medium' />
-                                        </p>
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <Attributes/>
-                                        <br/>
-                                        <Sell/>
-                                    </Grid.Column>
-                                </Grid>
-                            </Segment>
-                            <MetaData/>
+        let owner;
+        if (nft.owner === ethers.constants.AddressZero)
+            owner = 'N/A'
+        else
+            owner = nft.owner
+        if(isDesktopOrLaptop)
+            return (
+                <Layout>
+                    <div style={{background:'black', paddingBottom:'5%'}}>
+                        <div style={{paddingTop:'5%'}}>
+                            <div className="ui raised very padded text container segment" >
+                                <h2>{nft.metadata.name}</h2>
+                                <Segment>
+                                    <Grid columns={2} relaxed='very'>
+                                        <Grid.Column>
+                                            <p>
+                                            <Image src={nft.metadata.image} size='medium' />
+                                            </p>
+                                        </Grid.Column>
+                                        <Grid.Column>
+                                            <Attributes/>
+                                            <br/>
+                                            <Sell/>
+                                        </Grid.Column>
+                                    </Grid>
+                                </Segment>
+                                <MetaData/>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Layout>
-        );
+                </Layout>
+            );
+        if (isTabletOrMobile)
+            return(
+                <Layout>
+                    <div style={{background:'black', paddingBottom:'20%', paddingTop:'5%'}}>
+                        <div style={{margin:'auto', width:'50%'}}>
+                            <Segment style={{background:'#1E1E1D'}}>
+                            <Card style={{margin:'auto'}}>
+                                <Image src={nft.metadata.image} wrapped ui={false} />
+                                <Card.Content>
+                                    <Card.Header>{nft.metadata.name}</Card.Header>
+                                </Card.Content>
+                                <Button fluid positive>MAKE OFFER</Button>
+
+                                <Accordion styled>
+                                    <Accordion.Title
+                                    active={activeIndex === 0}
+                                    index={0}
+                                    onClick={handleClick}
+                                    >
+                                    <Icon name='dropdown' />
+                                    DESCRIPTION
+                                    </Accordion.Title>
+                                    <Accordion.Content active={activeIndex === 0}>
+                                    <p>Holder: {owner}</p>
+                                    <p>{nft.metadata.description}</p>
+                                    </Accordion.Content>
+
+                                    <Accordion.Title
+                                    active={activeIndex === 1}
+                                    index={1}
+                                    onClick={handleClick}
+                                    >
+                                    <Icon name='dropdown' />
+                                    DETAILS
+                                    </Accordion.Title>
+                                    <Accordion.Content active={activeIndex === 1}>
+                                        <Attributes/>
+                                    </Accordion.Content>
+
+                                    <Accordion.Title
+                                    active={activeIndex === 2}
+                                    index={2}
+                                    onClick={handleClick}
+                                    >
+                                    <Icon name='dropdown' />
+                                    STORY
+                                    </Accordion.Title>
+                                    <Accordion.Content active={activeIndex === 2}>
+                                        <p> 
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rhoncus, purus non convallis tincidunt, 
+                                        nulla massa suscipit ipsum, pellentesque porta metus enim nec nunc. Phasellus laoreet pretium sem, 
+                                        gravida ornare nisl mollis a.
+                                        </p>
+                                    </Accordion.Content>
+                                </Accordion>
+                            </Card>
+                            </Segment>
+                        </div>
+                    </div>
+                </Layout>
+            )
     }else{
         return(
         <Layout>
