@@ -1,17 +1,24 @@
 import React , { useState, useEffect } from 'react';
-import { Card, Image, Icon, Segment } from 'semantic-ui-react'
+import { Card, Image, Icon, Menu } from 'semantic-ui-react'
 import Layout from '../components/Layout';
 // import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { useMediaQuery } from 'react-responsive';
 
 export default function Drops() {
-
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 800px)'});
     // const address = useSelector((state) => state.wallet.address)
-    const [drops, setDrops] = useState(null)
+    const [drops, setDrops] = useState(null);
+    const [itemsPerRow, setItemsPerRow] = useState(3);
     // const [contract, setContract] = useState(null)
 
     useEffect(()=>{
+        if(isTabletOrMobile)
+            setItemsPerRow(1);
+        else
+            setItemsPerRow(3);
+
         async function fetchData(){
             const sdk = new ThirdwebSDK("mumbai")
             const nftDrop = sdk.getNFTDrop("0x50199376EE8073Dc9C1498eD4b18916fb165b779");
@@ -20,7 +27,7 @@ export default function Drops() {
             setDrops(unclaimedNFTs)
         }
         fetchData()
-      }, [])
+      }, [isTabletOrMobile])
 
     // const claimDrop = async () =>{
     //     const quantity = 1;
@@ -33,6 +40,21 @@ export default function Drops() {
     //         console.log('Claimed!')
     // }
 
+    const TeamMenu = ()=>{
+        return(
+            <div className="ui inverted secondary three item menu" style={{background:'1E1E1D', padding:'2%'}}>
+                <Menu.Item onClick={()=>{console.log('click')}}>
+                    OVO
+                </Menu.Item>
+                <Menu.Item onClick={()=>{console.log('click')}}>
+                    DREW HOUSE
+                </Menu.Item>
+                <Menu.Item onClick={()=>{console.log('click')}}>
+                    TEAMS
+                </Menu.Item>
+            </div>
+        )
+    }
     const UnclaimedDrops = () =>{
         if(drops){
             // const tmp = [...drops, ...drops, ...drops]
@@ -40,7 +62,6 @@ export default function Drops() {
                 const key = nft['id']
                 const name = nft['name']
                 const image = nft['image']
-                console.log(nft)
                 return(
                     <div style={{padding:'5%', margin:'auto'}} key={key}>
                         <Card  style={{background:'#1E1E1D'}}>
@@ -63,7 +84,7 @@ export default function Drops() {
                     </div>
                 )
             })
-            return (<Card.Group itemsPerRow={3}>{Items}</Card.Group>)
+            return (<Card.Group itemsPerRow={itemsPerRow}>{Items}</Card.Group>)
         }
     }
 
@@ -71,13 +92,11 @@ export default function Drops() {
         return (
             <Layout>
                 <div style={{background:'black', color:'white', paddingBottom:'20%'}}>
-                    <div style={{margin:'auto', width:'50%', paddingTop:'5%'}}>
-                        <h1 style={{paddingBottom:'3%'}}>DROPS</h1>
-                        <div>
-                            <Segment style={{background:'#1E1E1D'}}>
-                                <UnclaimedDrops/>
-                            </Segment>
-                        </div>
+                    <div style={{margin:'auto', paddingTop:'5%', textAlign:'center'}}>
+                        {/* <h1 style={{paddingBottom:'3%', textAlign:'center'}}>EXCLUSIVE DROPS</h1> */}
+                        <Icon name='gem outline' inverted size='huge'/>
+                        <TeamMenu/>
+                        <UnclaimedDrops/>
                     </div>
                 </div>
             </Layout>

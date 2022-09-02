@@ -126,10 +126,10 @@ export default function Nft() {
             return(
                 <Layout>
                     <div style={{background:'black', paddingBottom:'20%', paddingTop:'5%'}}>
-                        <div style={{margin:'auto', width:'50%'}}>
+                        <div style={{margin:'auto', width:'70%'}}>
                             <Segment style={{background:'#1E1E1D'}}>
-                            <Card style={{margin:'auto'}}>
-                                <Image src={nft.metadata.image} wrapped ui={false} />
+                            <Card fluid style={{margin:'auto'}}>
+                                <Image src={nft.metadata.image} fluid/>
                                 <Card.Content>
                                     <Card.Header>{nft.metadata.name}</Card.Header>
                                 </Card.Content>
