@@ -23,7 +23,7 @@ export default function Marketplace() {
     const AllListings = () =>{
         if(allListings){
             // const tmp = [activeListings[0], activeListings[0], activeListings[0]]
-            const Items = allListings.map( (listing) => {
+            const Items = allListings.map( (listing, key) => {
                 const asset = listing['asset']
                 const image = asset['image']
                 const name = asset['name']
@@ -47,7 +47,7 @@ export default function Marketplace() {
                 }
 
             return(
-                <Grid>
+                <Grid key={key}>
                     <Grid.Column width={4}>
                             <Image src={image} size='small'/>
                     </Grid.Column>

@@ -128,14 +128,14 @@ export default function Nft() {
                     <div style={{background:'black', paddingBottom:'20%', paddingTop:'5%'}}>
                         <div style={{margin:'auto', width:'70%'}}>
                             <Segment style={{background:'#1E1E1D'}}>
-                            <Card fluid style={{margin:'auto'}}>
+                            <Card fluid style={{margin:'auto', background:'#1E1E1D'}}>
                                 <Image src={nft.metadata.image} fluid/>
-                                <Card.Content>
-                                    <Card.Header>{nft.metadata.name}</Card.Header>
+                                <Card.Content >
+                                    <Card.Header style={{color:'white'}}>{nft.metadata.name}</Card.Header>
                                 </Card.Content>
                                 <Button fluid positive>MAKE OFFER</Button>
 
-                                <Accordion styled>
+                                <Accordion inverted style={{color:'white'}}>
                                     <Accordion.Title
                                     active={activeIndex === 0}
                                     index={0}
