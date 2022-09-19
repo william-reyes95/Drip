@@ -1,14 +1,13 @@
 import React , { useState, useEffect } from 'react';
 import Layout from '../components/Layout'
-import { Grid, Image, Container, Menu, Icon } from 'semantic-ui-react';
+import { Grid, Image, Menu, Icon } from 'semantic-ui-react';
 import LatestSales from "../components/LatestSales";
 import '../css/marketplace.css';
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 
 
 export default function Marketplace() {
-    const [allListings, setAllListings] = useState(null)
-
+    const [allListings, setAllListings] = useState(null);
     useEffect(()=>{
         async function fetchData(){
             const sdk = new ThirdwebSDK("mumbai")
@@ -78,7 +77,7 @@ export default function Marketplace() {
 
     const TeamMenu = ()=>{
         return(
-            <div className="ui inverted secondary six item menu" style={{background:'1E1E1D', padding:'2%'}}>
+            <div className="ui fluid inverted secondary four item menu" style={{background:'1E1E1D', padding:'2%'}}>
                 <Menu.Item onClick={()=>{console.log('click')}}>
                     LEAFS
                 </Menu.Item>
@@ -97,21 +96,15 @@ export default function Marketplace() {
 
     return (
         <Layout>
-            <Container fluid style={{background:'black', paddingBottom:'5%', paddingTop:'5%'}}>
-            <div style={{margin:'auto', width:'50%'}}>
+            <div style={{margin:'auto', padding:'2%', textAlign:'center', height:'100vh', overflowY:'auto'}}>
+                <Icon name='shopping cart' inverted size='huge'/>
+                <TeamMenu/>
+                <h1 style={{'color':'white', paddingBottom:'2%', paddingTop:'2%'}}>DIRECT LISTINGS</h1>
+                <div style={{padding:'2%', color:'white', background:'#1E1E1D'}}>
+                    <AllListings/>
+                </div>
+                <LatestSales/>
             </div>
-                <div style={{margin:'auto', width:'50%'}}>
-                    <TeamMenu/>
-                </div>
-                <div>
-                    <h1 style={{margin:'auto', width:'50%','color':'white', paddingBottom:'2%', paddingTop:'2%'}}>DIRECT LISTINGS</h1>
-                    <div style={{margin:'auto', width:'50%', padding:'2%', color:'white', background:'#1E1E1D'}}>
-                        <AllListings/>
-                    </div>
-                    <LatestSales/>
-                </div>
-
-            </Container>
         </Layout>
     );
   }

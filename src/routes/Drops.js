@@ -1,17 +1,14 @@
 import React , { useState, useEffect } from 'react';
 import { Card, Image, Icon, Menu } from 'semantic-ui-react'
 import Layout from '../components/Layout';
-// import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useMediaQuery } from 'react-responsive';
 
 export default function Drops() {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 800px)'});
-    // const address = useSelector((state) => state.wallet.address)
     const [drops, setDrops] = useState(null);
     const [itemsPerRow, setItemsPerRow] = useState(3);
-    // const [contract, setContract] = useState(null)
 
     useEffect(()=>{
         if(isTabletOrMobile)
@@ -29,28 +26,17 @@ export default function Drops() {
         fetchData()
       }, [isTabletOrMobile])
 
-    // const claimDrop = async () =>{
-    //     const quantity = 1;
-    //     const tx = await contract.claimTo(address, quantity);
-    //     const receipt = tx.receipt;
-    //     // const claimedTokenId = tx.id;
-    //     // const claimedNFT = await tx.data();
-    //     if(receipt)
-    //         console.log(receipt)
-    //         console.log('Claimed!')
-    // }
-
     const TeamMenu = ()=>{
         return(
-            <div className="ui inverted secondary three item menu" style={{background:'1E1E1D', padding:'2%'}}>
+            <div className="ui inverted secondary three item menu" style={{background:'1E1E1D'}}>
+                <Menu.Item onClick={()=>{console.log('click')}}>
+                    TEAMS
+                </Menu.Item>
                 <Menu.Item onClick={()=>{console.log('click')}}>
                     OVO
                 </Menu.Item>
                 <Menu.Item onClick={()=>{console.log('click')}}>
                     DREW HOUSE
-                </Menu.Item>
-                <Menu.Item onClick={()=>{console.log('click')}}>
-                    TEAMS
                 </Menu.Item>
             </div>
         )
@@ -77,9 +63,6 @@ export default function Drops() {
                                 22 Offers
                             </p>
                             </Card.Content>
-                            {/* <Button fluid positive onClick={claimDrop}>
-                                    CLAIM NOW
-                            </Button> */}
                         </Card>
                     </div>
                 )
@@ -91,7 +74,7 @@ export default function Drops() {
     if(drops){
         return (
             <Layout>
-                <div style={{background:'black', color:'white', paddingBottom:'20%'}}>
+                <div style={{background:'black', color:'white', paddingBottom:'5%', height:'100vh', overflowY:'auto'}}>
                     <div style={{margin:'auto', paddingTop:'5%', textAlign:'center'}}>
                         {/* <h1 style={{paddingBottom:'3%', textAlign:'center'}}>EXCLUSIVE DROPS</h1> */}
                         <Icon name='gem outline' inverted size='huge'/>

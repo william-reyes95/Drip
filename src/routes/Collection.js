@@ -57,14 +57,16 @@ function Collection() {
     }
     return (
       <Layout>
-        <div style={{background:'black', paddingBottom:'50%', color:'white'}}>
-            <div className='card-container' style={{paddingTop:'5%'}}>
-              <h1>COLLECTION</h1>
-              <Segment style={{background:'grey'}}>
-                  <NFTs/>
-              </Segment>
-            </div>
+        <div style={{background:'black', height:'100vh', color:'white', overflowY:'auto'}}>
+          <div className='card-container' style={{paddingTop:'5%'}}>
+            <h1>COLLECTION</h1>
+            <Segment style={{background:'#1E1E1D'}}>
+              <div>
+                <NFTs/>
+              </div>
+            </Segment>
           </div>
+        </div>
       </Layout>
     );
 }

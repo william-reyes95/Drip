@@ -3,11 +3,13 @@ import Layout from '../components/Layout'
 import Ownerships from '../components/Ownerships'
 import Media from '../components/Media'
 import { useParams } from "react-router-dom";
-import { Button, Grid, Image, Segment, Icon, Card, Accordion } from 'semantic-ui-react'
+import { Button, Grid, Image, Segment, Icon, Card, Accordion, Header } from 'semantic-ui-react'
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { ethers } from 'ethers';
+
+const sticker = require('../assets/RS-Authentic-Sticker.png');
 
 export default function Nft() {
     const isDesktopOrLaptop = useMediaQuery({query: '(min-width: 800px)'})
@@ -72,11 +74,11 @@ export default function Nft() {
     const Sell = () =>{
         if(address === nft.owner){
             return(
-                <Button negative>List for Sale</Button>
+                <Button fluid negative>List for Sale</Button>
             )
         }else{
             return(
-                <Button positive>Make an Offer</Button>
+                <Button fluid positive>Make an Offer</Button>
             )
         }
     }
@@ -100,9 +102,13 @@ export default function Nft() {
                 <Layout>
                     <div style={{background:'black', paddingBottom:'5%'}}>
                         <div style={{paddingTop:'5%'}}>
-                            <div className="ui raised very padded text container segment" >
-                                <h2>{nft.metadata.name}</h2>
-                                <Segment>
+                            <div className="ui raised very padded text container segment" style={{background:'#1E1E1D', color:'white'}}>
+                                <Header as='h1' style={{color:'white'}}>
+                                    {nft.metadata.name}
+                                    <Image src={sticker}/>
+
+                                </Header>
+                                <Segment style={{background:'#1E1E1D', color:'white'}}>
                                     <Grid columns={2} relaxed='very'>
                                         <Grid.Column>
                                             <p>
@@ -110,6 +116,7 @@ export default function Nft() {
                                             </p>
                                         </Grid.Column>
                                         <Grid.Column>
+                                            {/* <Image src={sticker} size='tiny' /> */}
                                             <Attributes/>
                                             <br/>
                                             <Sell/>
@@ -131,7 +138,9 @@ export default function Nft() {
                             <Card fluid style={{margin:'auto', background:'#1E1E1D'}}>
                                 <Image src={nft.metadata.image} fluid/>
                                 <Card.Content >
-                                    <Card.Header style={{color:'white'}}>{nft.metadata.name}</Card.Header>
+                                    <Header style={{color:'white'}}>
+                                        {nft.metadata.name}
+                                    </Header>
                                 </Card.Content>
                                 <Button fluid positive>MAKE OFFER</Button>
 

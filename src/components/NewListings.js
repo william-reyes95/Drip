@@ -64,13 +64,13 @@ function NewListings() {
 
     if(isTabletOrMobile){
       return(
-        <div style={{margin:'auto', width:'50%'}}>
+        <div>
           <MobileFeed/>
         </div>
       )
     }else{
       return (
-        <div style={{margin:'auto', width:'50%'}}>
+        <div>
           <Feed/>
         </div>
       );

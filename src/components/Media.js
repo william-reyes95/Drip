@@ -6,8 +6,8 @@ function Media () {
     const tavares = require('../assets/tavares.jpeg')
     const marner = require('../assets/marner.jpg')
     return(
-        <Container style={{ margin: 20 }}>
-            <Header as="h1" dividing>
+        <Container style={{ margin: 20}}>
+            <Header as="h1" dividing style={{color:'white'}}>
                 Media
             </Header>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/DWaixJSYXWU" 

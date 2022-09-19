@@ -6,7 +6,7 @@ function Ownership() {
     const isDesktopOrLaptop = useMediaQuery({query: '(min-width: 800px)'})
     if(isDesktopOrLaptop)
         return(
-            <Table basic='very' celled collapsing>
+            <Table basic='very' celled collapsing inverted>
                 <Table.Header>
                     <Table.Row>
                     <Table.HeaderCell>Buyer</Table.HeaderCell>
@@ -19,11 +19,10 @@ function Ownership() {
                 <Table.Body>
                     <Table.Row>
                         <Table.Cell>
-                            <Header as='h4' image>
-                                {/* <Image src={src} rounded size='mini' /> */}
-                                <Header.Content>
+                            <Header as='h4'>
+                                <Header.Content style={{color:'white'}}>
                                     Alice Wonderland
-                                    <Header.Subheader>0x781e8f5e6FD7430c8F677E5C5C144c76eF38c9b4</Header.Subheader>
+                                    <Header.Subheader style={{color:'white'}}>0x781e8f5e6FD7430c8F677E5C5C144c76eF38c9b4</Header.Subheader>
                                 </Header.Content>
                             </Header>
                         </Table.Cell>
@@ -35,9 +34,9 @@ function Ownership() {
                     <Table.Row>
                         <Table.Cell>
                             <Header as='h4' image>
-                                <Header.Content>
+                                <Header.Content style={{color:'white'}}>
                                     Bob Ross
-                                    <Header.Subheader>0x781e8f5e6FD7430c8F677E5C5C144c76eF38c9b4</Header.Subheader>
+                                    <Header.Subheader style={{color:'white'}}>0x781e8f5e6FD7430c8F677E5C5C144c76eF38c9b4</Header.Subheader>
                                 </Header.Content>
                             </Header>
                         </Table.Cell>
