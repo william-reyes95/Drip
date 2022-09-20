@@ -6,7 +6,7 @@ function Ownership() {
     const isDesktopOrLaptop = useMediaQuery({query: '(min-width: 800px)'})
     if(isDesktopOrLaptop)
         return(
-            <Table basic='very' celled collapsing inverted>
+            <Table basic='very' celled inverted unstackable>
                 <Table.Header>
                     <Table.Row>
                     <Table.HeaderCell>Buyer</Table.HeaderCell>

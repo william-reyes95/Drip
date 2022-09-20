@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 import Ownerships from '../components/Ownerships'
 import Media from '../components/Media'
 import { useParams } from "react-router-dom";
-import { Button, Grid, Image, Segment, Icon, Card, Accordion, Header } from 'semantic-ui-react'
+import { Button, Grid, Image, Segment, Icon, Card, Accordion, Header, List, Table } from 'semantic-ui-react'
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -37,37 +37,9 @@ export default function Nft() {
     const Attributes = () =>{
         if (nft){
             const Items = nft.metadata.attributes.map( (attrib, key) => {
-                return(<h3 key={key}>{attrib['trait_type']}: {attrib['value']}</h3>)
+                return(<List.Item key={key}>{attrib['trait_type']}: {attrib['value']}</List.Item>)
             })
-            return (<div>{Items}</div>)
-        }
-    }
-
-    const MetaData = () =>{
-        if (nft){
-            const description = nft.metadata.description
-            return(
-                <div>
-                    <h4>Holder: {nft.owner}</h4>
-                    <h3>Description</h3>
-                    <p>{description}</p>
-                    <div>
-                        <h2>Story</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rhoncus, purus non convallis tincidunt, 
-                            nulla massa suscipit ipsum, pellentesque porta metus enim nec nunc. Phasellus laoreet pretium sem, 
-                            gravida ornare nisl mollis a. Vestibulum lobortis orci eget urna ultricies suscipit. 
-                            Praesent finibus orci quis libero lobortis posuere. Vivamus sed blandit risus, 
-                            pellentesque feugiat eros. Cras tristique facilisis est, et ultrices nunc vestibulum eu. 
-                            Pellentesque diam felis, consequat ut arcu sit amet, vehicula maximus nisi. Cras non elit sapien.
-                            Nulla varius hendrerit efficitur. Cras et sem neque. Quisque quis erat non libero feugiat pharetra a nec lacus.
-                            Donec eleifend nunc eu sollicitudin ullamcorper. Fusce fermentum pellentesque augue ut fringilla.
-                        </p>
-                    </div>
-                    <Media/>
-                    <h2>Ownership History</h2>
-                    <Ownerships/>
-                </div>)
+            return (<List>{Items}</List>)
         }
     }
 
@@ -78,7 +50,10 @@ export default function Nft() {
             )
         }else{
             return(
-                <Button fluid positive>Make an Offer</Button>
+                <div>
+                    <Button inverted >Buy Now</Button>
+                    <Button inverted >Place Bid</Button>
+                </div>
             )
         }
     }
@@ -90,7 +65,91 @@ export default function Nft() {
         else
             setIndex(index)
       }
-
+    const Bids = ()=>{
+        return(
+            <Table basic='very' celled inverted unstackable>
+                <Table.Header>
+                    <Table.Row>
+                    <Table.HeaderCell>Buyer</Table.HeaderCell>
+                    <Table.HeaderCell>Sale Price</Table.HeaderCell>
+                    <Table.HeaderCell>Date / Time</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    <Table.Row>
+                        <Table.Cell>
+                            <Header as='h4'>
+                                <Header.Content style={{color:'white'}}>
+                                    Alice Wonderland
+                                    <Header.Subheader style={{color:'white'}}>0x781e8f5e6FD7430c8F677E5C5C144c76eF38c9b4</Header.Subheader>
+                                </Header.Content>
+                            </Header>
+                        </Table.Cell>
+                        <Table.Cell>22</Table.Cell>
+                        <Table.Cell>Aug 7, 22 1:04pm</Table.Cell>
+                    </Table.Row>
+                </Table.Body>
+            </Table>
+        )
+    }
+    const Jersey = () => {
+        return(
+            <div style={{paddingBottom:'5%', margin:'auto', width:'50%', color:'white'}}>
+                <Grid columns={3} relaxed='very'>
+                    <Grid.Column>
+                        <p>
+                        <Image src={nft.metadata.image} size='medium' />
+                        </p>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <h1>{nft.metadata.name}</h1>
+                        <Attributes/>
+                        <br/>
+                        <Sell/>
+                        <div style={{paddingTop:'5%'}}>
+                            <List >
+                                <List.Item><a>View Bids</a></List.Item>
+                                <List.Item><a>View Ownership History</a></List.Item>
+                                <List.Item>Collection:</List.Item>
+                                <List.Item>Authentic Original: Verified</List.Item>
+                            </List>
+                       </div>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Image src={sticker} />
+                    </Grid.Column>
+                </Grid>
+                <Segment style={{background:'#1E1E1D'}}>
+                    <h1>Jersey Details</h1>
+                    <p>{nft.metadata.description}</p>
+                </Segment>
+                <Segment style={{background:'#1E1E1D'}}>
+                    <h1>Story</h1>
+                    <p>Cras tristique facilisis est, et ultrices nunc vestibulum eu. 
+                        Pellentesque diam felis, consequat ut arcu sit amet, vehicula maximus nisi. Cras non elit sapien.
+                        Nulla varius hendrerit efficitur. Cras et sem neque.
+                    </p>
+                    <Media/>
+                </Segment>
+                <Segment style={{background:'#1E1E1D', height:'200px'}}>
+                    <h1>Condition Report</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rhoncus, purus non convallis tincidunt, 
+                        nulla massa suscipit ipsum, pellentesque porta metus enim nec nunc. Phasellus laoreet pretium sem, 
+                        gravida ornare nisl mollis a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rhoncus, purus non convallis tincidunt, 
+                        nulla massa suscipit ipsum, pellentesque porta metus enim nec nunc. Phasellus laoreet pretium sem, 
+                        gravida ornare nisl mollis a.</p>
+                </Segment>
+                <Segment style={{background:'#1E1E1D', height:'200px'}}>
+                        <h1>Bids</h1>
+                        <Bids/>
+                </Segment>
+                <Segment style={{background:'#1E1E1D'}}>
+                        <h1>Ownership History</h1>
+                        <Ownerships/>
+                </Segment>
+            </div>
+        )
+    }
     if(nft){
         let owner;
         if (nft.owner === ethers.constants.AddressZero)
@@ -100,39 +159,15 @@ export default function Nft() {
         if(isDesktopOrLaptop)
             return (
                 <Layout>
-                    <div style={{background:'black', paddingBottom:'5%'}}>
-                        <div style={{paddingTop:'5%'}}>
-                            <div className="ui raised very padded text container segment" style={{background:'#1E1E1D', color:'white'}}>
-                                <Header as='h1' style={{color:'white'}}>
-                                    {nft.metadata.name}
-                                    <Image src={sticker}/>
-
-                                </Header>
-                                <Segment style={{background:'#1E1E1D', color:'white'}}>
-                                    <Grid columns={2} relaxed='very'>
-                                        <Grid.Column>
-                                            <p>
-                                            <Image src={nft.metadata.image} size='medium' />
-                                            </p>
-                                        </Grid.Column>
-                                        <Grid.Column>
-                                            {/* <Image src={sticker} size='tiny' /> */}
-                                            <Attributes/>
-                                            <br/>
-                                            <Sell/>
-                                        </Grid.Column>
-                                    </Grid>
-                                </Segment>
-                                <MetaData/>
-                            </div>
-                        </div>
+                    <div style={{background:'black', paddingTop:'3%', height:'100vh', overflowY:'auto'}}>
+                        <Jersey/>
                     </div>
                 </Layout>
             );
         if (isTabletOrMobile)
             return(
                 <Layout>
-                    <div style={{background:'black', paddingBottom:'20%', paddingTop:'5%'}}>
+                    <div style={{background:'black',  height:'100vh', overflowY:'auto', paddingTop:'5%'}}>
                         <div style={{margin:'auto', width:'70%'}}>
                             <Segment style={{background:'#1E1E1D'}}>
                             <Card fluid style={{margin:'auto', background:'#1E1E1D'}}>
@@ -195,12 +230,12 @@ export default function Nft() {
     }else{
         return(
         <Layout>
-            <div style={{background:'black', paddingBottom:'200%', paddingTop:'5%'}}>
-            <div className="ui raised very padded text container segment" >
-                <div style={{textAlign:'center'}}>
-                    <Icon loading name='circle notched' size='massive'/>
+            <div style={{background:'black', height:'100vh', paddingTop:'5%'}}>
+                <div className="ui raised very padded text container segment" >
+                    <div style={{textAlign:'center'}}>
+                        <Icon loading name='circle notched' size='massive'/>
+                    </div>
                 </div>
-            </div>
             </div>
         </Layout>)
     }

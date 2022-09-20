@@ -4,6 +4,7 @@ import { Grid, Image, Menu, Icon } from 'semantic-ui-react';
 import LatestSales from "../components/LatestSales";
 import '../css/marketplace.css';
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+const banner = require('../assets/ovo.png');
 
 
 export default function Marketplace() {
@@ -97,7 +98,8 @@ export default function Marketplace() {
     return (
         <Layout>
             <div style={{margin:'auto', padding:'2%', textAlign:'center', height:'100vh', overflowY:'auto'}}>
-                <Icon name='shopping cart' inverted size='huge'/>
+                {/* <Icon name='shopping cart' inverted size='huge'/> */}
+                <Image size='large'src={banner} style={{margin:'auto'}}/>
                 <TeamMenu/>
                 <h1 style={{'color':'white', paddingBottom:'2%', paddingTop:'2%'}}>DIRECT LISTINGS</h1>
                 <div style={{padding:'2%', color:'white', background:'#1E1E1D'}}>
