@@ -14,16 +14,11 @@ function Layout(props) {
     const Navigation = () =>{
         if(isDesktopOrLaptop)
             return(
-                <div style={{background:'black'}} className="ui inverted six item menu">
+                <div style={{background:'black'}} className="ui inverted five item menu">
                     <Menu.Item>
-                        {/* <Image src='https://vafloc01.s3.amazonaws.com/WBStatic/site1103961/dist/img/logo.svg' /> */}
-                        <Image src={logo} />
-                    </Menu.Item>
-                    <Menu.Item className="item">
-                        <Link to="/">Home</Link>
-                    </Menu.Item>
-                    <Menu.Item className="item">
-                        <Link to="/drops">Drops</Link>
+                        <Link to="/">
+                            <Image src={logo} />
+                        </Link>
                     </Menu.Item>
                     <Menu.Item className="item">
                         <Link to="/marketplace">Marketplace</Link>
@@ -31,7 +26,9 @@ function Layout(props) {
                     <Menu.Item className="item">
                         <Link to="/Collection">Collection</Link>
                     </Menu.Item>
-    
+                    <Menu.Item className="item">
+                        Community
+                    </Menu.Item>
                     <Menu.Item className="item">
                         <ConnectWallet/>
                     </Menu.Item>
@@ -71,10 +68,6 @@ function Layout(props) {
                             <Icon name='home' size="large"/>
                             <Link to="/" style={{color:'white', fontSize:'150%'}}>Home</Link>
                         </Menu.Item>
-                        <Menu.Item >
-                            <Icon name='gem' size="large"/>
-                            <Link to="/drops" style={{color:'white', fontSize:'150%'}}>Drops</Link>
-                        </Menu.Item>
                         <Menu.Item>
                             <Icon name='shop' size="large"/>
                             <Link to="/marketplace" style={{color:'white', fontSize:'150%'}}>Marketplace</Link>
@@ -82,6 +75,10 @@ function Layout(props) {
                         <Menu.Item>
                             <Icon name='box'size="large"/>
                             <Link to="/Collection" style={{color:'white', fontSize:'150%'}}>Collection</Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Icon name='group'size="large"/>
+                            <p style={{color:'white', fontSize:'150%'}}>Community</p>
                         </Menu.Item>
                     </Sidebar>
 

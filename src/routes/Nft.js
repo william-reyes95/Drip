@@ -177,7 +177,7 @@ export default function Nft() {
                                         {nft.metadata.name}
                                     </Header>
                                 </Card.Content>
-                                <Button fluid positive>MAKE OFFER</Button>
+                                <Button fluid inverted>MAKE OFFER</Button>
 
                                 <Accordion inverted style={{color:'white'}}>
                                     <Accordion.Title
