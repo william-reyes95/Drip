@@ -108,8 +108,8 @@ export default function Nft() {
                         <Sell/>
                         <div style={{paddingTop:'5%'}}>
                             <List >
-                                <List.Item><a>View Bids</a></List.Item>
-                                <List.Item><a>View Ownership History</a></List.Item>
+                                <List.Item><a href="">View Bids</a></List.Item>
+                                <List.Item><a href="">View Ownership History</a></List.Item>
                                 <List.Item>Collection:</List.Item>
                                 <List.Item>Authentic Original: Verified</List.Item>
                             </List>
